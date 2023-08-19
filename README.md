@@ -24,7 +24,7 @@ deployDappToken(
 cd token-deployer
 npm install
 npm run compile
-npm run deploy
+npm run deploy -- --network <network>
 ```
 
 ## hardhat

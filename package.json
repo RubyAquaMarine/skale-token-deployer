@@ -28,8 +28,7 @@
     "watch": "tsc -w",
     "prepublishOnly": "npm run build",
     "compile" : "npx hardhat compile",
-    "deploy":"npx hardhat deploy --network hardhat --tags TokenFactory",
-    "deploy_europa":"npx hardhat deploy --network europa --tags TokenFactory"
+    "deploy":"npx hardhat deploy --tags TokenFactory"
   },
   "files": [
     "dist/src/",
