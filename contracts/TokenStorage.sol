@@ -3,7 +3,7 @@ pragma solidity ^0.6.2;
 
 import "hardhat/console.sol";
 
-contract ContractFactory {
+contract TokenStorage {
     /*
      *  Events
      */

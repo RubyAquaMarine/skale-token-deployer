@@ -2,7 +2,7 @@
 pragma solidity ^0.6.2;
 
 import "hardhat/console.sol";
-import "./ContractFactory.sol";
+import "./TokenStorage.sol";
 import "./SkaleMappedERC20Token.sol";
 import "./Wrapper.sol";
 import {ITokenManager, ITokenManagerLinker} from "./FactoryInterface.sol";
@@ -14,7 +14,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 // Roles REGISTRAR_ROLE  (connectSchain)
 // Roles TOKEN_REGISTRAR_ROLE (addERC20byOwner)
 
-contract TokenFactory is ContractFactory {
+contract TokenFactory is TokenStorage {
     address public MSW = 0xD244519000000000000000000000000000000000;
     address public Deployer;
 
