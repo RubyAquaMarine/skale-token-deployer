@@ -4,9 +4,13 @@ Dapp chain owners are required to deploy and map tokens from other skale chains 
 These smart contracts make it possible to deploy and map tokens from the chain owners MSW or deployer key within 1 transaction. 
 
 ## requirements 
+- Add Skale Chain network to the `hardhat.config.ts`
+
 The deployed contract `TokenFactory` must be granted the following roles.
 - REGISTRAR_ROLE : `connectSchain()`
 - TOKEN_REGISTRAR_ROLE : `addERC20byOwner()`
+
+
 
 ## function call 
 For dapp chain owners that want to import tokens from another chain aka the EuropaHub, the user will insert `elated-tan-skat` into `_fromChainName` and the token wrapper address from that chain. 
@@ -63,3 +67,4 @@ This project uses the following OpenZepplin [packages](https://www.npmjs.com/pac
 
 ### todo
 - upgrade to solidiy 0.8.0 and latest OZ v4 
+- contract verification

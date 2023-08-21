@@ -35,25 +35,21 @@ contract TokenFactory is ContractFactory {
         tokenManagerLinker = ITokenManagerLinker(TokenManagerLinker);
     }
 
-    function isConnected(string memory _chainName)
-        public
-        view
-        returns (bool _isConnected)
-    {
+    function isConnected(
+        string memory _chainName
+    ) public view returns (bool _isConnected) {
         _isConnected = tokenManagerLinker.hasSchain(_chainName);
         return _isConnected;
     }
 
-    function connectToChain(string memory _chainName)
-        public
-        returns (bool _isConnected)
-    {
+    function connectToChain(
+        string memory _chainName
+    ) public returns (bool _isConnected) {
         tokenManagerLinker.connectSchain(_chainName);
         _isConnected = tokenManagerLinker.hasSchain(_chainName);
         return _isConnected;
     }
 
-   
     function deployDappToken(
         string memory _name,
         string memory _symbol,
@@ -76,9 +72,7 @@ contract TokenFactory is ContractFactory {
         _tokenAddress = address(latestToken);
         console.log("Deploying ERC20 with address:", _tokenAddress);
         registerToken(_tokenAddress);
-        // uint8 dec = latestToken.decimals();// working
-        // string memory sym = latestToken.symbol();// working
-        // now map the token
+       
         _mapToken(_fromChainName, _fromToken, _tokenAddress);
         return _tokenAddress;
     }
@@ -88,7 +82,6 @@ contract TokenFactory is ContractFactory {
         address _chainOrigin,
         address _chainHosted
     ) internal {
-       
         bool _connected = tokenManagerLinker.hasSchain(_chainName);
 
         if (!_connected) {
@@ -108,13 +101,14 @@ contract TokenFactory is ContractFactory {
         console.log("_mapToken: finished");
     }
 
-    // Not complete because its impossible to automate 100% of the steps to onboard tokens from l1
-    // testing with wrapper
+    // prereq: depositBoxContract.addERC20TokenByOwner requires targetChainName  and erc20OnMainnet
+    // Deploy erc20 , deploy wrapper, map l2 erc20 clone token to l1
+    // enter the mainnet l1 token address into _fromToken
+
     function deployMainnetToken(
         string memory _name,
         string memory _symbol,
         uint8 _decimal,
-        string memory _fromChainName,
         address _fromToken
     ) public returns (address _tokenAddress, address _wrapperTokenAddress) {
         require(
@@ -133,16 +127,19 @@ contract TokenFactory is ContractFactory {
         console.log("Deploying ERC20 with address:", _tokenAddress);
         registerToken(_tokenAddress);
 
+        // the l1 side has one step - whitelist a new token to the depositbox sc , however, mapping is still required after whitelisting
+        _mapToken("Mainnet", _fromToken, _tokenAddress);
+
         // latestWrapper
         latestWrapper = IERC20(_tokenAddress);
 
         //deploy wrapper token
-        string memory wr = "Wrapper";
+        string memory wr = "Wrapper ";
         string memory w = "w";
         //concat strings
         latestToken = new SkaleS2SERC20Wrapper(
-            _name,
-            _symbol,
+            _concatenateStrings(wr, _name),
+            _concatenateStrings(w, _symbol),
             latestWrapper
         );
         _wrapperTokenAddress = address(latestToken);
@@ -152,9 +149,28 @@ contract TokenFactory is ContractFactory {
         );
         registerWrapper(_wrapperTokenAddress);
 
-        // now map the token (impossible? depositBoxSC on L1: how about messageProxy)
-        // _mapToken(_fromChainName, _fromToken, _tokenAddress);
-
         return (_tokenAddress, _wrapperTokenAddress);
+    }
+
+    function _concatenateStrings(
+        string memory str1,
+        string memory str2
+    ) public pure returns (string memory) {
+        bytes memory bytesStr1 = bytes(str1);
+        bytes memory bytesStr2 = bytes(str2);
+
+        bytes memory concatenated = new bytes(
+            bytesStr1.length + bytesStr2.length
+        );
+
+        uint256 k = 0;
+        for (uint256 i = 0; i < bytesStr1.length; i++) {
+            concatenated[k++] = bytesStr1[i];
+        }
+        for (uint256 i = 0; i < bytesStr2.length; i++) {
+            concatenated[k++] = bytesStr2[i];
+        }
+
+        return string(concatenated);
     }
 }

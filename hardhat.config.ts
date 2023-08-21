@@ -13,7 +13,7 @@ import "./tasks/launch_public_mint";
 */
 dotenv.config();
 
-const PRIVATE_KEY: string | undefined = process.env.ADMIN_KEY;
+const PRIVATE_KEY: string | undefined = process.env.ADMIN_KEY_TESTNET;// ADMIN_KEY_TESTNET or ADMIN_KEY
 if (!PRIVATE_KEY) {
   throw new Error("Private Key Not Set in .env");
 }
@@ -83,6 +83,10 @@ const config: HardhatUserConfig = {
     },
     "nebula-testnet": {
       url: "https://staging-v3.skalenodes.com/v1/staging-faint-slimy-achird",
+      accounts: [PRIVATE_KEY],
+    },
+    "europa-testnet": {
+      url: "https://staging-v3.skalenodes.com/v1/staging-legal-crazy-castor",
       accounts: [PRIVATE_KEY],
     },
   },

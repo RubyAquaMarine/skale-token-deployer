@@ -16,7 +16,7 @@ const deployFunction: DeployFunction = async function (
     from: deployer,
     log: true,
     args: [deployer],
-    skipIfAlreadyDeployed: true, // Set this to false if you want to deploy regardless
+    skipIfAlreadyDeployed: false, // Set this to false if you want to deploy regardless
   });
 };
 
