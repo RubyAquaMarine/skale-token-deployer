@@ -1,10 +1,10 @@
 # Token Deployer : Skale Ecosystem
 Dapp chain owners are required to deploy and map tokens from other skale chains in order to use the `ima-bridge/metaport/s2s/` aka multichain-transfers 
 
-These smart contracts make it possible to deploy and map tokens from the chain owners MSW or deployer key within 1 transaction. 
+The `TokenFactory` smart contracts make it possible to deploy and map tokens from the chain owners MSW or deployer key within 1 transaction. 
 
 ## requirements 
-- Add Skale Chain network to the `hardhat.config.ts`
+- Add your Skale Chain network to the `hardhat.config.ts` file
 
 The deployed contract `TokenFactory` must be granted the following roles.
 - REGISTRAR_ROLE : `connectSchain()`

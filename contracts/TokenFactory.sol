@@ -72,7 +72,7 @@ contract TokenFactory is TokenStorage {
         _tokenAddress = address(latestToken);
         console.log("Deploying ERC20 with address:", _tokenAddress);
         registerToken(_tokenAddress);
-       
+
         _mapToken(_fromChainName, _fromToken, _tokenAddress);
         return _tokenAddress;
     }
@@ -82,28 +82,41 @@ contract TokenFactory is TokenStorage {
         address _chainOrigin,
         address _chainHosted
     ) internal {
-        bool _connected = tokenManagerLinker.hasSchain(_chainName);
+        // make two logics depending if dapp token (schain connection required) or mainnet token
+        bool isMainnet = compareStrings(_chainName, "Mainnet");
 
-        if (!_connected) {
-            tokenManagerLinker.connectSchain(_chainName);
+        if (isMainnet) {
             tokenManager.addERC20TokenByOwner(
                 _chainName,
                 _chainOrigin,
                 _chainHosted
             );
         } else {
-            tokenManager.addERC20TokenByOwner(
-                _chainName,
-                _chainOrigin,
-                _chainHosted
-            );
+            bool _connected = tokenManagerLinker.hasSchain(_chainName); 
+            if (!_connected) {
+                tokenManagerLinker.connectSchain(_chainName);
+                tokenManager.addERC20TokenByOwner(
+                    _chainName,
+                    _chainOrigin,
+                    _chainHosted
+                );
+            } else {
+                tokenManager.addERC20TokenByOwner(
+                    _chainName,
+                    _chainOrigin,
+                    _chainHosted
+                );
+            }
         }
+
         console.log("_mapToken: finished");
     }
 
     // prereq: depositBoxContract.addERC20TokenByOwner requires targetChainName  and erc20OnMainnet
     // Deploy erc20 , deploy wrapper, map l2 erc20 clone token to l1
     // enter the mainnet l1 token address into _fromToken
+
+    // Error: Chain is already connected : throws error if already connected.
 
     function deployMainnetToken(
         string memory _name,
@@ -172,5 +185,14 @@ contract TokenFactory is TokenStorage {
         }
 
         return string(concatenated);
+    }
+
+    function compareStrings(
+        string memory str1,
+        string memory str2
+    ) public pure returns (bool) {
+        return
+            keccak256(abi.encodePacked(str1)) ==
+            keccak256(abi.encodePacked(str2));
     }
 }
