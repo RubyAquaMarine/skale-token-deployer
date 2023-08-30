@@ -23,12 +23,17 @@ deployDappToken(
         address _fromToken
 ```
 
-## Installation
+## Deployment
 ```shell
 cd token-deployer
 npm install
 npm run compile
 npm run deploy -- --network <network>
+
+or
+yarn install
+yarn compile 
+yarn deploy --network <network>
 ```
 
 ## hardhat
@@ -68,3 +73,5 @@ This project uses the following OpenZepplin [packages](https://www.npmjs.com/pac
 ### todo
 - upgrade to solidiy 0.8.0 and latest OZ v4 
 - contract verification
+
+- make script to grant the roles to the TokenFactory 

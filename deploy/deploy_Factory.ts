@@ -1,7 +1,7 @@
 import { ethers, run } from "hardhat";
 import { DeployFunction } from "hardhat-deploy/types";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
-console.log(" DEPLOY");
+console.log(" running deploy_Factory");
 const deployFunction: DeployFunction = async function (
   hre: HardhatRuntimeEnvironment
 ) {

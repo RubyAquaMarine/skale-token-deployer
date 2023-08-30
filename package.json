@@ -27,8 +27,8 @@
     "build": "tsc",
     "watch": "tsc -w",
     "prepublishOnly": "npm run build",
-    "compile" : "npx hardhat compile",
-    "deploy":"npx hardhat deploy --tags TokenFactory"
+    "compile": "npx hardhat compile",
+    "deploy": "npx hardhat deploy --tags TokenFactory"
   },
   "files": [
     "dist/src/",
@@ -37,5 +37,8 @@
     "README.md"
   ],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@typechain/hardhat": "^9.0.0"
+  }
 }

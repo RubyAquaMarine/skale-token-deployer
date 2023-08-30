@@ -2,8 +2,11 @@ import "@nomicfoundation/hardhat-toolbox";
 import dotenv from "dotenv";
 import "hardhat-deploy";
 import "hardhat-deploy-ethers";
-import { HardhatUserConfig } from "hardhat/config";
+
 import "solidity-coverage";
+
+import "@typechain/hardhat";
+import { HardhatUserConfig } from "hardhat/types";
 
 /*
 import "./tasks/ima_registration";
@@ -98,6 +101,10 @@ const config: HardhatUserConfig = {
     etherscan: {
       apiKey: process.env.ETHERSCAN_API_KEY,
     },
+  },
+  typechain: {
+    outDir: "typechain",
+    target: "ethers-v5",
   },
 };
 
