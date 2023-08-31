@@ -18,7 +18,10 @@
     "tslint": "^5.16.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.0.1",
-    "typescript": "^4.0.3"
+    "typescript": "^4.0.3",
+    "@typechain/hardhat": "^8.0.0"
+   
+  
   },
   "scripts": {
     "lint:fix": "prettier --write 'src/**/*.{js,ts}' 'test/**/*.{js,ts}' && tslint --fix --config tslint.json --project tsconfig.json",
@@ -28,7 +31,9 @@
     "watch": "tsc -w",
     "prepublishOnly": "npm run build",
     "compile": "npx hardhat compile",
-    "deploy": "npx hardhat deploy --tags TokenFactory"
+    "deploy": "npx hardhat deploy --tags TokenFactory",
+    "token": "npx hardhat run scripts/dappToken.ts --network europa-testnet",
+    "roles": "npx hardhat run scripts/grantRoles.ts --network europa-testnet"
   },
   "files": [
     "dist/src/",
@@ -37,8 +42,5 @@
     "README.md"
   ],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@typechain/hardhat": "^9.0.0"
-  }
+  "license": "ISC"
 }

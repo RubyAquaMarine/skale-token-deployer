@@ -75,3 +75,5 @@ This project uses the following OpenZepplin [packages](https://www.npmjs.com/pac
 - contract verification
 
 - make script to grant the roles to the TokenFactory 
+
+ "@typechain/ethers-v5" : "5.7.1"
