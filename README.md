@@ -7,8 +7,8 @@ The `TokenFactory` smart contracts make it possible to deploy and map tokens fro
 - Add your Skale Chain network to the `hardhat.config.ts` file
 
 The deployed contract `TokenFactory` must be granted the following roles.
-- REGISTRAR_ROLE : `connectSchain()`
-- TOKEN_REGISTRAR_ROLE : `addERC20byOwner()`
+- TokenManagerLinker| REGISTRAR_ROLE : `connectSchain()`
+- TokenManager| TOKEN_REGISTRAR_ROLE : `addERC20byOwner()`
 
 
 

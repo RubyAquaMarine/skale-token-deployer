@@ -39,7 +39,6 @@
     "watch": "tsc -w",
     "prepublishOnly": "npm run build",
     "compile": "npx hardhat compile",
-    "deploy": "npx hardhat deploy --tags TokenFactory",
     "token": "npx hardhat run scripts/dappToken.ts --network europa-testnet"
   },
   "files": [
