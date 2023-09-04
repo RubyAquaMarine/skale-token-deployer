@@ -4,24 +4,32 @@
   "description": "",
   "main": "index.js",
   "devDependencies": {
+    "@nomicfoundation/hardhat-chai-matchers": "^2.0.2",
+    "@nomicfoundation/hardhat-ethers": "^3.0.4",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.9",
     "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "@nomicfoundation/hardhat-verify": "^1.1.1",
     "@openzeppelin/contracts": "^3.1.0",
     "@skalenetwork/ima-interfaces": "^2.0.0",
+    "@typechain/ethers-v6": "^0.4.3",
+    "@typechain/hardhat": "^8.0.0",
+    "@types/chai": "^4.3.6",
+    "@types/mocha": "^10.0.1",
+    "chai": "^4.3.8",
     "chalk": "^4.1.2",
     "dotenv": "^16.3.1",
     "hardhat": "^2.17.0",
     "hardhat-deploy": "^0.11.36",
     "hardhat-deploy-ethers": "^0.4.1",
+    "hardhat-gas-reporter": "^1.0.9",
     "prettier": "2.0.5",
     "solidity-coverage": "^0.8.4",
     "ts-node": "^8.1.0",
     "tslint": "^5.16.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.0.1",
-    "typescript": "^4.0.3",
-    "@typechain/hardhat": "^8.0.0"
-   
-  
+    "typechain": "^8.3.1",
+    "typescript": "^4.0.3"
   },
   "scripts": {
     "lint:fix": "prettier --write 'src/**/*.{js,ts}' 'test/**/*.{js,ts}' && tslint --fix --config tslint.json --project tsconfig.json",
@@ -32,8 +40,7 @@
     "prepublishOnly": "npm run build",
     "compile": "npx hardhat compile",
     "deploy": "npx hardhat deploy --tags TokenFactory",
-    "token": "npx hardhat run scripts/dappToken.ts --network europa-testnet",
-    "roles": "npx hardhat run scripts/grantRoles.ts --network europa-testnet"
+    "token": "npx hardhat run scripts/dappToken.ts --network europa-testnet"
   },
   "files": [
     "dist/src/",
@@ -42,5 +49,8 @@
     "README.md"
   ],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@typechain/ethers-v5": "^11.1.1"
+  }
 }

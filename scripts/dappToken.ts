@@ -1,5 +1,5 @@
 import { run, ethers, network } from "hardhat";
-import { TokenFactory } from "../typechain-types";
+import { TokenFactory } from "../typechain";
 
 async function main() {
   console.log(network.name);

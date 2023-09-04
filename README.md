@@ -26,11 +26,6 @@ deployDappToken(
 ## Deployment
 ```shell
 cd token-deployer
-npm install
-npm run compile
-npm run deploy -- --network <network>
-
-or
 yarn install
 yarn compile 
 yarn deploy --network <network>
